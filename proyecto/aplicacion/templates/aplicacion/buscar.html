@@ -1,0 +1,28 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+<!-- Header-->
+<header class="py-5" style="background-color: #17E8CB;">
+    <div class="container px-lg-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+            <div class="m-4 m-lg-5">
+                <h1 class="display-5 fw-bold">Buscar Clientes</h1>
+                        
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock titulo %}
+
+{% block contenido %}
+<form action="{% url 'buscarClientesNombre' %}" method="get">
+    {% csrf_token %}
+    <p>Buscar nombre: <input type="text" name="buscar" id="buscar"></p>
+    <input type="submit" value="Buscar">
+</form>
+{% endblock contenido %}
+
+
+{% block menues %}
+    <br>
+{% endblock menues %}

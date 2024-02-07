@@ -1,0 +1,94 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+<!-- Header-->
+<header class="py-5" style="background-color: #17E8CB;">
+    <div class="container px-lg-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+            <div class="m-4 m-lg-5">
+                <h1 class="display-5 fw-bold">Area de Cuentas Corrientes</h1>
+                        
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<table>
+    <tr>
+        <td width="200"><h6>Cargar cuenta corriente</h6></td>
+        <td>
+            <a
+            href="{% url 'cuentas_forms' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear" style="font-size: 12px;"> </i>
+            </a>
+        </td>
+    </tr>   
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <br>
+            <th>Dni</th>    
+            <th>Cliente</th>    
+            <th>Apellido</th>  
+            <th>Id_producto</th>
+            <th>Nombre producto</th> 
+            <th>Cantidad unidades</th>
+            <th>Status</th>
+            <th>Fecha compra</th>
+            <th>Fecha pago</th>
+                
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cuentas %}
+        <tr>
+            {% for j in clientes %}
+                    {% if j.id_cliente == c.id_cliente %}
+                    <td> {{ j.dni }}</td>
+                    <td> {{ j.nombre|capfirst }}</td>
+                    <td> {{ j.apellido|capfirst }}</td>
+                    {% endif %}
+            {% endfor %}
+            <td>{{ c.id_producto }}</td>
+            <td>
+                {% for i in productos %}
+                    {% if i.id_producto == c.id_producto %}
+                        {{ i.nombre|capfirst }}                    
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ c.cantidad_unidades }}</td>
+            <td>{{ c.status|capfirst }}</td>
+            <td>{{ c.fecha_compra }}</td>
+            <td>{{ c.fecha_pago }}</td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>    
+{% endblock contenido %}
+
+{% block menues %}
+{% csrf_token %}
+<table> 
+    <tr>
+        <td><label for="buscarNombre">Buscar nombre producto:</label></td> 
+        <td><label for="buscarCliente">Buscar nombre cliente:</label></td> 
+    </tr>
+    <tr> 
+        <td><form class="form-inline" action="{% url 'buscarProductos' %}" method="get">
+            <input type="text" name="buscar" id="buscarNombre">
+            <button type="submit">Buscar</button></form></td> 
+        <td><form class="form-inline" action="{% url 'buscarClientes' %}" method="get">
+            <input type="text" name="buscar" id="buscarCliente">
+            <button type="submit">Buscar</button></form></td> 
+    </tr>
+</table>
+
+{% endblock menues %}

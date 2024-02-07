@@ -1,0 +1,79 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+<!-- Header-->
+<header class="py-5" style="background-color: #17E8CB;">
+    <div class="container px-lg-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+            <div class="m-4 m-lg-5">
+                <h1 class="display-5 fw-bold">Area de Proveedores</h1>
+                        
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<table>
+    <tr>
+        <td width="250"><h6>Agregar un nuevo proveedor</h6></td>
+        <td>
+            <a
+            href="{% url 'proveedores_forms' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear" style="font-size: 12px;"> </i>
+            </a>
+        </td>
+    </tr>   
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Cuit</th>
+            <th>Domicilio</th>
+            <th>Email</th>
+            <th>Tipo Producto</th>
+            <th>Limite Compra</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for c in proveedores  %}
+        <tr>
+            <td>{{ c.id_proveedor }}</td>
+            <td>{{ c.nombre|capfirst }}</td>
+            <td>{{ c.cuit }}</td>
+            <td>{{ c.domicilio|capfirst }}</td>
+            <td>{{ c.email }}</td>
+            <td>{{ c.tipo_producto|capfirst }}</td>
+            <td>{{ c.limite_compra }}</td>
+            <td>{{ c.status|capfirst }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}
+
+{% block menues %}
+{% csrf_token %}
+<table> 
+    <tr>
+        <td><label for="buscarNombre">Buscar nombre:</label></td> 
+        <td><label for="buscarCuit">Buscar cuit:</label></td> 
+    </tr>
+    <tr> 
+        <td><form class="form-inline" action="{% url 'buscarProveedor' %}" method="get">
+            <input type="text" name="buscar" id="buscarNombre">
+            <button type="submit">Buscar</button></form></td> 
+        <td><form class="form-inline" action="{% url 'buscarProveedorCuit' %}" method="get">
+            <input type="text" name="buscar" id="buscarCuit">
+            <button type="submit">Buscar</button></form></td> 
+    </tr>
+</table>
+
+{% endblock menues %}

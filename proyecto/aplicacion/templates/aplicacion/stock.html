@@ -1,0 +1,66 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+<!-- Header-->
+<header class="py-5" style="background-color: #17E8CB;">
+    <div class="container px-lg-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+            <div class="m-4 m-lg-5">
+                <h1 class="display-5 fw-bold">Area de Stock</h1>
+                        
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock titulo %}
+
+{% block contenido %}
+<table>
+    <tr>
+        <td width="250"><h6>Agregar un nuevo producto</h6></td>
+        <td>
+            <a
+            href="{% url 'stocks_forms' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear" style="font-size: 12px;"> </i>
+            </a>
+        </td>
+    </tr>   
+</table>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>                
+                <br>
+                <th>Id Producto</th>
+                <th>Cantidad unidades</th>
+                <th>Minimo de unidades</th>                
+            </tr>
+        </thead>
+        <tbody>
+    {% for c in stock  %}
+            <tr>
+                <td>{{ c.id_producto }}</td>
+                <td>{{ c.cantidad_unidades }}</td>
+                <td>{{ c.min_unidades }}</td>
+                
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
+
+{% block menues %}
+{% csrf_token %}
+<table> 
+    <tr>
+        <td><label for="buscarIDProd">Buscar id producto:</label></td> 
+    </tr>
+    <tr> 
+        <td><form class="form-inline" action="{% url 'buscarStock' %}" method="get">
+            <input type="text" name="buscar" id="buscarIDProd">
+            <button type="submit">Buscar</button></form></td> 
+            </tr>
+</table>
+
+{% endblock menues %}
