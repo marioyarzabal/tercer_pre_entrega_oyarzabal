@@ -1,0 +1,22 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+    <h3 class="mb-5">Eliminar un Proveedor</h3>
+{% endblock titulo %}
+    
+
+{% block contenido %}
+<form action="" method="POST">
+    {% csrf_token %}   
+    <div class="text-center">     
+        <h5>¿ Esta seguro de eliminar el proveedor ? <p style="color:red">{{ object }}</p> </h5>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block" value="Confirmar">
+    </div>
+</form>
+{% endblock contenido %}
+
+{% block menues %}
+    <br>
+{% endblock menues %}

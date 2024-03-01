@@ -20,7 +20,7 @@
         <td width="250"><h6>Agregar un nuevo producto</h6></td>
         <td>
             <a
-            href="{% url 'productos' %}"
+            href="{% url 'producto_create' %}"
             class="btn btn-primary btn-sm"
             ><i class="fa fa-plus fa-lg" title="Crear" style="font-size: 12px;"> </i>
             </a>
@@ -32,7 +32,7 @@
         <thead>
             <tr>                
                 <br>
-                <th>Id</th>
+                <th>Id producto</th>
                 <th>Id_proveedor</th>
                 <th>Nombre</th>
                 <th>Presentacion</th>
@@ -40,10 +40,11 @@
                 <th>Fecha vencimiento</th>
                 <th>Droga</th>
                 <th>Precio</th>
+                <th>Accion</th>
             </tr>
         </thead>
         <tbody>
-    {% for c in productos  %}
+    {% for c in producto_list  %}
             <tr>
                 <td>{{ c.id_producto }}</td>
                 <td>{{ c.id_proveedor }}</td>
@@ -53,6 +54,20 @@
                 <td>{{ c.fecha_vence }}</td>
                 <td>{{ c.droga|capfirst }}</td>
                 <td>{{ c.precio }}</td>
+                <td>
+                    <a
+                      href="{% url 'producto_update' c.id %}"
+                      class="btn btn-primary"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-edit fa-sm" title="Edit Producto"></i>
+                    </a>
+                    <a
+                      href="{% url 'producto_delete' c.id %}"
+                      class="btn btn-danger"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-trash fa-sm" title="Delete Producto"></i>
+                    </a>                
+                  </td>
             </tr>
     {% endfor %}
         </tbody>

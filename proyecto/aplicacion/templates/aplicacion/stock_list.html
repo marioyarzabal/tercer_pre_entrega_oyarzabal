@@ -20,7 +20,7 @@
         <td width="250"><h6>Agregar un nuevo producto</h6></td>
         <td>
             <a
-            href="{% url 'stock_form' %}"
+            href="{% url 'stock_create' %}"
             class="btn btn-primary btn-sm"
             ><i class="fa fa-plus fa-lg" title="Crear" style="font-size: 12px;"> </i>
             </a>
@@ -34,16 +34,30 @@
                 <br>
                 <th>Id Producto</th>
                 <th>Cantidad unidades</th>
-                <th>Minimo de unidades</th>                
+                <th>Minimo de unidades</th>    
+                <th>Acciones</th>             
             </tr>
         </thead>
         <tbody>
-    {% for c in stock  %}
+    {% for c in stock_list  %}
             <tr>
                 <td>{{ c.id_producto }}</td>
                 <td>{{ c.cantidad_unidades }}</td>
                 <td>{{ c.min_unidades }}</td>
-                
+                <td>
+                    <a
+                      href="{% url 'stock_update' c.id %}"
+                      class="btn btn-primary"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-edit fa-sm" title="Edit Stock"></i>
+                    </a>
+                    <a
+                      href="{% url 'stock_delete' c.id %}"
+                      class="btn btn-danger"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-trash fa-sm" title="Delete Stock"></i>
+                    </a>                
+                  </td>
             </tr>
     {% endfor %}
         </tbody>
@@ -51,16 +65,5 @@
 {% endblock contenido %}
 
 {% block menues %}
-{% csrf_token %}
-<table> 
-    <tr>
-        <td><label for="buscarIDProd">Buscar id producto:</label></td> 
-    </tr>
-    <tr> 
-        <td><form class="form-inline" action="{% url 'buscarStock' %}" method="get">
-            <input type="text" name="buscar" id="buscarIDProd">
-            <button type="submit">Buscar</button></form></td> 
-            </tr>
-</table>
 
 {% endblock menues %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Cliente(models.Model):
@@ -20,7 +21,16 @@ class Proveedor(models.Model):
     cuit=models.IntegerField()
     domicilio=models.CharField(max_length=300)
     email=models.EmailField()
-    tipo_producto=models.CharField(max_length=100)
+    TIPO_PRODUCTO_CHOICES = [
+        ('Medicamentos', 'Medicamentos'),
+        ('Perfumeria', 'Perfumeria'),
+        ('Regaleria', 'Regaleria'),
+        ('Libreria', 'Libreria'),
+        ('Descartables', 'Descartables'),
+        ('Otros', 'Otros'),
+    ]
+    tipo_producto = models.CharField(max_length=100, choices=TIPO_PRODUCTO_CHOICES)
+    #tipo_producto=models.CharField(max_length=100)
     limite_compra = models.DecimalField(max_digits=10, decimal_places=2) 
     status=models.BooleanField()
 
@@ -42,7 +52,7 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     
     def __str__(self):
-        return f"{self.nombre}, {self.presentacion}, {self.droga}, {self.precio}"
+        return f"{self.nombre}, {self.presentacion}, {self.droga}, {self.precio}, {self.id_producto}"
 
 class Stock(models.Model):
     id_producto=models.IntegerField()
@@ -62,3 +72,10 @@ class Cuenta(models.Model):
     
     def __str__(self):
         return f"{self.id_cliente}, {self.id_producto}, {self.cantidad_unidades}"
+    
+class Avatar(models.Model):
+    imagen = models.ImageField(upload_to="avatares")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} {self.imagen}"   

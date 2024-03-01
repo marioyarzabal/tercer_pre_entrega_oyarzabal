@@ -1,0 +1,22 @@
+{% extends 'aplicacion/home.html' %}
+
+{% block titulo %}
+    <h1 class="mb-5">Avatar</h1>
+{% endblock titulo %}
+    
+{% block contenido %}
+<div style="display: flex; justify-content: center;">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <input type="submit" value="Actualizar Avatar">
+    </form>
+</div>
+{% endblock contenido %}
+
+{% block menues %}
+
+{% endblock menues %}

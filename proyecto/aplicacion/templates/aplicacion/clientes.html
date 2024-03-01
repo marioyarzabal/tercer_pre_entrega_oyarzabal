@@ -39,18 +39,33 @@
                 <th>Fecha nacimiento</th>
                 <th>Domicilio</th>
                 <th>Email</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
     {% for c in clientes  %}
             <tr>
-                <td>{{ c.id }}</td>
+                <td>{{ c.id_cliente }}</td>
                 <td>{{ c.nombre|capfirst }}</td>
                 <td>{{ c.apellido|capfirst }}</td>
                 <td>{{ c.dni }}</td>
                 <td>{{ c.fecha_nacimiento }}</td>
                 <td>{{ c.domicilio|capfirst }}</td>
                 <td>{{ c.email }}</td>
+                <td>
+                    <a
+                      href="{% url 'clienteActualizar' c.id_cliente %}"
+                      class="btn btn-primary"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-edit fa-sm" title="Edit Cliente"></i>
+                    </a>
+                    <a
+                      href="{% url 'clienteBorrar' c.id_cliente %}"
+                      class="btn btn-danger"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-trash fa-sm" title="Delete Cliente"></i>
+                    </a>                
+                  </td>
             </tr>
     {% endfor %}
         </tbody>

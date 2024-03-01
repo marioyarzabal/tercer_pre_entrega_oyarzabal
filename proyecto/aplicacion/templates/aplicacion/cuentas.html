@@ -42,6 +42,7 @@
             <th>Status</th>
             <th>Fecha compra</th>
             <th>Fecha pago</th>
+            <th>Accion</th>
                 
         </tr>
     </thead>
@@ -67,7 +68,20 @@
             <td>{{ c.status|capfirst }}</td>
             <td>{{ c.fecha_compra }}</td>
             <td>{{ c.fecha_pago }}</td>
-            
+            <td>
+                <a
+                  href="{% url 'cuentaActualizar' c.id %}"
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Cliente"></i>
+                </a>
+                <a
+                  href="{% url 'cuentaBorrar' c.id %}"
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Cliente"></i>
+                </a>                
+              </td>
         </tr>
         {% endfor %}
     </tbody>

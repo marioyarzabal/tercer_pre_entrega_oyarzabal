@@ -21,7 +21,7 @@
         <td width="250"><h6>Agregar un nuevo proveedor</h6></td>
         <td>
             <a
-            href="{% url 'proveedores_forms' %}"
+            href="{% url 'proveedores_create' %}"
             class="btn btn-primary btn-sm"
             ><i class="fa fa-plus fa-lg" title="Crear" style="font-size: 12px;"> </i>
             </a>
@@ -44,7 +44,7 @@
         </tr>
     </thead>
     <tbody>
-{% for c in proveedores  %}
+{% for c in proveedor_list  %}
         <tr>
             <td>{{ c.id_proveedor }}</td>
             <td>{{ c.nombre|capfirst }}</td>
@@ -56,13 +56,13 @@
             <td>{{ c.status|capfirst }}</td>
             <td>
                 <a
-                  href="{% url 'proveedorActualizar' c.id_proveedor %}"
+                  href="{% url 'proveedores_update' c.id %}"
                   class="btn btn-primary"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                   ><i class="fa fa-edit fa-sm" title="Edit Proveedor"></i>
                 </a>
                 <a
-                  href="{% url 'proveedorBorrar' c.id_proveedor %}"
+                  href="{% url 'proveedores_delete' c.id %}"
                   class="btn btn-danger"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                   ><i class="fa fa-trash fa-sm" title="Delete Proveedor"></i>
